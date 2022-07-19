@@ -10,6 +10,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-let Event = mongoose.model('User', userSchema, 'users');
+let User = mongoose.model('User', userSchema, 'users');
 
 module.exports = User

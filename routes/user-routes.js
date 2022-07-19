@@ -6,14 +6,16 @@ router.get('/login', (req, res) => {
     res.render('user/login'); 
 });
 
-router.post('login', (req, res) => {
+router.post('/login', (req, res) => {
+    console.log(req.body);
 });
 
 router.get('/signup', (req, res) => {
-    res.render('user/signup')
+    res.render('user/signup');
 });
 
 router.post('/signup', (req, res) => {
+    console.log(req.body);
 });
 
 router.get('/profile', (req, res) => {
@@ -23,4 +25,4 @@ router.get('/profile', (req, res) => {
 router.get('logout', (req, res) => {
 });
 
-module.exports = router
+module.exports = router;
