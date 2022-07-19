@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 
 const router = express.Router();
 
@@ -47,6 +48,38 @@ router.get('/:id', (req, res) => {
             res.render('event/show', {
                 event: event
             })
+        } else {
+            console.log(err);
+        };
+    });
+});
+
+
+router.get('/edit/:id', (req, res) => {
+    Event.findOne({_id: req.params.id}, (err, event) => {
+        if (!err) {
+            res.render('event/edit', {
+                event: event,
+                eventDate: moment(event.date).format('YYYY-MM-DD')
+            })
+        } else {
+            console.log(err);
+        };
+    });
+});
+
+router.post('/update', (req, res) => {
+    let newFields = {
+        title: req.body.title,
+        description: req.body.description,
+        location: req.body.location,
+        date: req.body.date
+    }
+    let query = {_id: req.body.id}
+
+    Event.updateOne(query, newFields, (err) => {
+        if(!err) {
+            res.redirect('/events');
         } else {
             console.log(err);
         };
