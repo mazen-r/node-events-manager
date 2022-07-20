@@ -33,6 +33,11 @@ app.use(express.static('node_modules'));
 const eventRoutes = require("./routes/event-routes");
 const userRoutes = require("./routes/user-routes");
 
+app.get('*', (req,res,next)=> { //saving user email as a global
+    res.locals.user = req.user || null
+    next()
+});
+
 app.get('/', (req, res) => {
     res.redirect('/events');
 });
