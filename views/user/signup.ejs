@@ -5,7 +5,8 @@
   <div class="row mt-4">
     <div class="col-md-9 offset-md-3">
       <h1 class="display-4">Sign up </h1>
-            <hr>         
+            <hr>
+            <%- include('../partials/flashMessages') -%>          
             <form  action="/users/signup" method="post">
               <div class="form-group">
                 <label for="email">Email</label>
