@@ -30,10 +30,16 @@ router.post('/signup', passport.authenticate('local.signup', {
 ));
 
 router.get('/profile', (req, res) => {
-    res.render('user/profile');
+    res.render('user/profile', {
+        success: req.flash('sucess')
+    });
 });
 
-router.get('logout', (req, res) => {
-});
+router.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/users/login');
+    });
+  });
 
 module.exports = router;

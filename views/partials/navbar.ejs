@@ -13,14 +13,19 @@
           <a class="nav-link" href="/events/create">Add New Event</a>
         </li>
       </ul>
-
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/users/login">Login</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/users/signup">Sign Up</a>
-        </li>
+        <% if (!user) { %>        
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/login">Login</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/signup">Sign Up</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/users/logout">logout</a>
+          </li>
+        <%} %>
       </ul>
       
     </div>
