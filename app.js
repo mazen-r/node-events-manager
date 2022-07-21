@@ -27,8 +27,7 @@ app.use(passport.session());
 
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
-
-
+app.use(express.static('uploads'))
 
 const eventRoutes = require("./routes/event-routes");
 const userRoutes = require("./routes/user-routes");

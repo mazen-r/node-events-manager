@@ -32,7 +32,8 @@ passport.use('local.signup', new localStrategy({
             if (!user) { //crates a user
                 let newUser = new User();
                 newUser.email = req.body.email;
-                newUser.password = newUser.hashPassword(req.body.password);
+                newUser.password = newUser.hashPassword(req.body.password),
+                newUser.avatar = "profile.png";
                 newUser.save((err, user) => {
                     if (!err) {
                         return done(null, user, req.flash('success', 'User Added'));

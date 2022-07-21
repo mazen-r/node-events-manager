@@ -4,6 +4,18 @@ const passport = require('passport');
 const User = require('../models/User');
 
 const router = express.Router();
+const multer = require('multer');
+
+// configure multer 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '.png')}
+});
+
+var upload = multer({ storage: storage });
 
 //middleware for chencking if user auhtenticated
 isAuthenticated = (req, res, next) => {
@@ -41,11 +53,24 @@ router.get('/profile', isAuthenticated, (req, res) => {
     });
 });
 
+router.post('/uploadAvatar', upload.single('avatar'), (req,res)=> {
+    let newFields = {
+        avatar: req.file.filename
+    };
+    User.updateOne( {_id: req.user._id}, newFields, (err)=> {
+        if (!err) {
+            res.redirect('/users/profile');
+        } else {
+            console.log(err);
+        };
+    });
+});
+
 router.get('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/users/login');
     });
-  });
+});
 
 module.exports = router;

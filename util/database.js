@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-  mongoose.connect('mongodb://localhost:27017/events', {useNewUrlParser: true}, (err) => {
+  mongoose.connect('mongodb+srv://mazenr:F0vFDKjN4WRJ5HTB@storeapi.opa8t.mongodb.net/storeAPI', {useNewUrlParser: true}, (err) => {
     if (err) {
         console.log(err);
     } else {
