@@ -5,6 +5,12 @@ const router = express.Router();
 
 const Event = require('../models/event');
 
+//middleware for chencking if user auhtenticated
+isAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/users/login');
+};
+
 router.get('/', (req,res)=> {   
     Event.find({}, (err,events)=> {
         let chunk = []
@@ -18,7 +24,7 @@ router.get('/', (req,res)=> {
     });
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuthenticated, (req, res) => {
     res.render('event/create');
 });
 

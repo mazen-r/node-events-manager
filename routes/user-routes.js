@@ -5,6 +5,12 @@ const User = require('../models/User');
 
 const router = express.Router();
 
+//middleware for chencking if user auhtenticated
+isAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/users/login');
+};
+
 router.get('/login', (req, res) => {
     res.render('user/login', {
         error: req.flash('error')
@@ -29,7 +35,7 @@ router.post('/signup', passport.authenticate('local.signup', {
     failureFlash: true}
 ));
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isAuthenticated, (req, res) => {
     res.render('user/profile', {
         success: req.flash('sucess')
     });
