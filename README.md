@@ -5,7 +5,7 @@ Events Manager with Nodejs &amp; Mongodb
 
 - Used Nodejs, Express Framework, Mongodb
 - Used ejs as a template engine  
-- Events is authorized against users, used Passport for user Authentication  
+- Events are authorized against users, used Passport for user Authentication  
 - Deployed to heroku server  
 
 ### How to run the app ?
