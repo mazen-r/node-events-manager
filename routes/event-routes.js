@@ -48,17 +48,20 @@ router.post('/create', (req ,res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-    Event.findOne({_id: req.params.id}, (err, event) => {
-        if (!err) {
+router.get('/:id', async (req, res) => {
+    try {
+        const event = await Event.findOne({_id: req.params.id})
+        if (event) {
             res.render('event/show', {
                 event: event
             })
         } else {
-            console.log(err);
-        };
-    });
-});
+            res.render('event/notFound').status(404)
+        }
+    } catch (err) {
+        res.render('event/notFound').status(404)
+    }
+})
 
 
 router.get('/edit/:id', (req, res) => {
