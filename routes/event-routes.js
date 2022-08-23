@@ -56,10 +56,10 @@ router.get('/:id', async (req, res) => {
                 event: event
             })
         } else {
-            res.render('event/notFound').status(404)
+            res.status(404).render('event/notFound')
         }
     } catch (err) {
-        res.render('event/notFound').status(404)
+        res.status(404).render('event/notFound')
     }
 })
 
